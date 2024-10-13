@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import Profile from "@components/Profile"
+import { Suspense } from "react"
 
 
 
@@ -21,7 +22,9 @@ const MyProfile = () => {
     },[session?.user.id]);
 
     const handleEdit = (post)=>{
+      <Suspense>
       router.push(`/update-prompt?id=${post._id}`)
+      </Suspense>
     }
     const handleDelete = async (post) => {
       const hasConfirmed = confirm(
