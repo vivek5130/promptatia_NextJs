@@ -1,0 +1,42 @@
+To make a client component write
+'use client'    -- on top of the page
+whenever using hooks such as useState or useClient u have to use client component
+
+For dynamic routes use file name inside [] and to access the params inside function({params}) and to access params.filename
+
+Data fetching
+1. serverside Rendering (use cache - no-store  to fetch for every request)
+2. staticside Rendering(it fetch only once- good for content which does not changes much )
+3. incremental static generation(next : revalidate : time(sec))  // it fetch after every t sec
+
+//Installation
+npm install bcrypt mongodb mongoose next-auth
+
+Since we are using Google provider in next auth we need to set up our project and get credentials from console.cloud.google.com
+https://youtu.be/wm5gMKuwSYk?t=4915 
+check above video to check how it is done
+
+Every next js route is serverless route which is lamda function which runs when called and make connnectin with database
+/api folder contains all backend related stuff such as authentication, userRoutes, prompt(create, edit, delete) routes
+
+Authentication
+in api/auth/[...nextauth]/route.js   we have imported next-auth and GoogleProvider
+in Next auth it takes Providers(list of providers(GoogleProvider(clientId, clientSecret))), session, signIn
+in sign if new user then create one or login
+
+we are establishing a connection to database in utils/database.js
+and schema in models/..
+
+
+Feature	                    React	                                Next.js
+Routing	                Client-side routing (manual)	        File-based routing (automatic)
+Data Fetching	        Client-side only (useEffect)	        SSR, SSG, ISR, and client-side
+API Routes	            External server needed	                Built-in API routes
+Navigation	            react-router or manual	                next/link, next/router
+Image Optimization	    Manual or third-party	                Built-in <Image> component
+Global Setup	        No specific setup	                    _app.js, _document.js for global config
+Performance	            Manual optimization	                    Automatic optimizations
+
+
+To-do
+-implement pagination
