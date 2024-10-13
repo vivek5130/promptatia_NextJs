@@ -18,12 +18,17 @@ const UpdatePrompt = () => {
 
   useEffect(()=>{
     const getPromptDetails = async()=>{
+      try{
         const response = await fetch(`/api/prompt/${promptId}`);
         const data = await response.json();
         setPost({
             prompt : data.prompt,
             tag : data.tag
         })
+      }
+      catch(error){
+        console.log("error fetching prompts", error)
+      }
     }
     if(promptId) getPromptDetails();
   },[promptId])
@@ -52,15 +57,16 @@ const UpdatePrompt = () => {
     }
   }
   return (
-    <Suspense>
-    <Form   
-      type = "Edit"
-      post = {post}
-      setPost = {setPost}
-      submitting = {submitting}
-      handleSubmit = {updatePrompt}
-    />
+    <Suspense fallback={<div>Loading...</div>}>
+      <Form
+        type="Edit"
+        post={post}
+        setPost={setPost}
+        submitting={submitting}
+        handleSubmit={updatePrompt}
+      />
     </Suspense>
+    
   )
 }
 
