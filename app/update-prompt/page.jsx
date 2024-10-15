@@ -72,6 +72,8 @@ const UpdatePromptContent = () => {
 };
 const UpdatePrompt = () => {
   // as per next js we need to use Suspense boundary 
+  // useSearchParams() and other client-side hooks need to be wrapped in a React Suspense boundary to handle client-only logic. 
+  // You should use Suspense from React to ensure that the component is only rendered client-side.
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <UpdatePromptContent />
