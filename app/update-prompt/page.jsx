@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState,Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import Form from "@components/Form";
 
-const UpdatePrompt = () => {
+const UpdatePromptContent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const promptId = searchParams.get("id");
@@ -50,7 +50,7 @@ const UpdatePrompt = () => {
       });
 
       if (response.ok) {
-        
+
         router.push("/");
       }
     } catch (error) {
@@ -70,5 +70,12 @@ const UpdatePrompt = () => {
     />
   );
 };
-
+const UpdatePrompt = () => {
+  // as per next js we need to use Suspense boundary 
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <UpdatePromptContent />
+    </Suspense>
+  );
+};
 export default UpdatePrompt;
